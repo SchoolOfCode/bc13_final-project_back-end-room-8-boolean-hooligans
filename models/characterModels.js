@@ -6,8 +6,7 @@ export async function getCharacters() {
 }
 
 export async function getCharacterName(name) {
-    const retrieveCharacter = await query
-    ("SELECT * FROM CharacterTable WHERE char_name LIKE $1", [`%${name}%`]);
+    const retrieveCharacter = await query ("SELECT * FROM CharacterTable WHERE char_name LIKE $1",[`${name}%`]);
     return retrieveCharacter.rows;
 }
 // more dynamic - allow empty fields
