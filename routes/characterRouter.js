@@ -1,6 +1,5 @@
 import express from "express";
 const router = express.Router();
-import db from "..db/db.js";
 import {
     getCharacters,
     getCharacterName,
@@ -32,5 +31,8 @@ router.patch("/", async function (req, res) {
 });
 
 router.delete("/", async function (req, res) {
+    const deletedCharacter = await murderCharacter(req.params.id);
+    res.json({ success: true, payload: deletedCharacter });
+});
 
-})
+export default router;
