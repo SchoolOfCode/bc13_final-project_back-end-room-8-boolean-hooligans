@@ -1,12 +1,12 @@
 import express from "express";
-const router = express.Router();
 import {
     getCharacters,
     getCharacterName,
     createCharacter,
     updateCharacter,
     murderCharacter
-} from "../models/characterModels";
+} from "../models/characterModels.js";
+const router = express.Router();
 
 router.get("/", async function (req, res) {
     const characters = await getCharacters();
