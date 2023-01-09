@@ -18,10 +18,7 @@ router.get("/", async function (req, res) {
   }
 });
 
-// router.get("/", async function (req, res) {
-//     const character = await getCharacterName();
-//     res.json({ success: true, payload: character });
-// });
+
 
 router.post("/", async function (req, res) {
   const character = req.body;
