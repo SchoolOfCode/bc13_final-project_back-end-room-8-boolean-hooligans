@@ -11,13 +11,31 @@ test("GET characters",  async() => {
     );
 });
 
-/*Containing([
-            expect.objectContaining({
-                character_id: expect.any(Number),
-                user_id: expect.any(Number),
-                char_name: expect.any(String),
-                char_height: expect.any(Number),
-                char_age: expect.any(Number),
-                char_alive: expect.any(Boolean),
-            })
-        ])*/
+test("GET specific character by name", async() => {
+    const response = await supertest(app).get("/characters?char_name=Betty");
+    expect(response.status).toBe(200);
+    expect(response.body.success).toBe(true);
+    expect(response.body).toStrictEqual({
+        success: true, payload: expect.any(Array)
+    });
+});
+
+// this test currently not working
+/*test("POST a new character", async() => {
+    const payload = {
+        "user_id": 3,
+        "char_name": 'Dani',
+        "char_height": 6,
+        "char_age": 32,
+        "char_alive": false,
+    };
+    const response = await supertest(app)
+    .post("/characters")
+    .send(payload);
+    // .set("Accept", "application.json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.success).toBe(true);
+    expect(response.body.payload[0].user_id).toEqual(Number);
+
+});*/

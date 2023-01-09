@@ -11,7 +11,7 @@ export async function getCharacterName(name) {
 }
 // more dynamic - allow empty fields
 export async function createCharacter(data) {
-    const createCharacter = await query ("INSERT INTO CharacterTable (char_name, char_height, char_age, char_alive) VALUES ($1, $2, $3, $4", [data.char_name, data.char_height, data.char_age, data.char_alive]);
+    const createCharacter = await query ("INSERT INTO CharacterTable (user_id, char_name, char_height, char_age, char_alive) VALUES ($1, $2, $3, $4, $5)", [data.user_id, data.char_name, data.char_height, data.char_age, data.char_alive]);
     const newCharacter = createCharacter.rows[0];
     return newCharacter;
 }
