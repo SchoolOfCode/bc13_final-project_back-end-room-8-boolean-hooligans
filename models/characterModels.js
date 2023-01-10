@@ -47,7 +47,7 @@ export async function updateCharacter(data, id) {
 
 export async function murderCharacter(id) {
   const murderCharacter = await query(
-    "DELETE * FROM CharacterTable WHERE char_id = $1, RETURNING *",
+    "DELETE FROM CharacterTable WHERE character_id = $1 RETURNING *",
     [id]
   );
   const murderedCharacter = murderCharacter.rows[0];

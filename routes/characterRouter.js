@@ -32,7 +32,7 @@ router.patch("/:id", async function (req, res) {
   res.json({ success: true, payload: editedCharacter });
 });
 
-router.delete("/", async function (req, res) {
+router.delete("/:id", async function (req, res) {
   const deletedCharacter = await murderCharacter(req.params.id);
   res.json({ success: true, payload: deletedCharacter });
 });
