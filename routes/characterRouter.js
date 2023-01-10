@@ -4,7 +4,7 @@ import {
   getCharacterName,
   createCharacter,
   updateCharacter,
-  murderCharacter,
+  murderCharacter
 } from "../models/characterModels.js";
 const router = express.Router();
 
@@ -18,17 +18,17 @@ router.get("/", async function (req, res) {
   }
 });
 
-
-
 router.post("/", async function (req, res) {
   const character = req.body;
   const newCharacter = await createCharacter(character);
   res.json({ success: true, payload: newCharacter });
 });
 
-router.patch("/", async function (req, res) {
-  const editCharacter = req.body;
+router.patch("/:id", async function (req, res) {
+  console.log("req.body:", req.body, req.params.id);
+  const editCharacter = (req.body, req.params.id);
   const editedCharacter = await updateCharacter(editCharacter);
+  console.log("edited:", editedCharacter);
   res.json({ success: true, payload: editedCharacter });
 });
 
