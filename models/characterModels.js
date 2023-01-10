@@ -11,7 +11,7 @@ export async function getCharacters() {
 
 export async function getCharacterName(name) {
   const retrieveCharacter = await query(
-    "SELECT * FROM CharacterTable WHERE char_name LIKE $1",
+    "SELECT * FROM CharacterTable WHERE char_name ILIKE $1",
     [`${name}%`]
   );
   return retrieveCharacter.rows;
@@ -29,7 +29,7 @@ export async function updateCharacter(id, data) {
       data.char_height,
       data.char_age,
       data.char_alive,
-      id,
+      id
     ]
   );
 
