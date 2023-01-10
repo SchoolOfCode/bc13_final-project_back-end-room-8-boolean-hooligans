@@ -91,27 +91,27 @@ test('test delete', async function(){
 // });
 
 
-// test('post new character test', async() => {
-//   const payload = {
-//         user_id: 3,
-//         char_name: "Dani",
-//         char_height: 6,
-//         char_age: 32,
-//         char_alive: false
-//       };
+test('post new character test', async() => {
+  const payload = {
+        user_id: 3,
+        char_name: "Filip",
+        char_height: 6,
+        char_age: 32,
+        char_alive: false
+      };
  
-//   const response = await supertest(app)
-//   .post('/characters')
-//   .send(payload)
-//   .set('Accept', 'application/json')
+  const response = await supertest(app)
+  .post('/characters')
+  .send(payload)
+  .set('Accept', 'application/json')
  
-//   expect(response.status).toBe(200)
-//   expect(response.body.success).toBeTruthy
-//   expect(response.body.payload.length).toEqual(1)
+  expect(response.status).toBe(200)
+  expect(response.body.success).toBeTruthy
+  expect(response.body.payload.length).toEqual(1)
 
-//   //check response data:
-//   //expect(response.body.payload[0].user_id).toEqual(3)
-//   expect(response.body.payload[0].char_name).toMatch('Dani')
+  //check response data:
+  //expect(response.body.payload[0].user_id).toEqual(3)
+  expect(response.body.payload[0].char_name).toMatch('Filip')
   
-//   })
+  })
 
