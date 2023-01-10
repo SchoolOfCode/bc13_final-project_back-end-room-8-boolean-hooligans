@@ -8,6 +8,9 @@ import {
 } from "../models/characterModels.js";
 const router = express.Router();
 
+
+//Get all characters and search by parameter
+
 router.get("/", async function (req, res) {
   if (req.query.char_name !== undefined) {
     const character = await getCharacterName(req.query.char_name);
@@ -18,19 +21,25 @@ router.get("/", async function (req, res) {
   }
 });
 
+
+//Create Character
+
 router.post("/", async function (req, res) {
   const character = req.body;
   const newCharacter = await createCharacter(character);
   res.json({ success: true, payload: newCharacter });
 });
 
-router.patch("/:id", async function (req, res) {
-  console.log("req.body:", req.body, req.params.id);
-  const editCharacter = (req.body, req.params.id);
-  const editedCharacter = await updateCharacter(editCharacter);
-  console.log("edited:", editedCharacter);
-  res.json({ success: true, payload: editedCharacter });
-});
+
+//Edit/Update Character 
+
+router.patch("/:id", async function (req, res){
+  const result = await updateCharacter(req.params.id, req.body)
+  res.json({ success: true, payload: result });
+})
+
+
+// Delete Character
 
 router.delete("/:id", async function (req, res) {
   const deletedCharacter = await murderCharacter(req.params.id);
