@@ -20,21 +20,35 @@ export async function getCharacterName(name) {
 //**********Edit/Update Character by ID**********
 // make this more dynamic - certain things may be blank
 
-export async function updateCharacter(id, data) {
-  const update = await query(
-    "UPDATE CharacterTable SET user_id = $1, char_name = $2, char_height = $3, char_age = $4, char_alive = $5 WHERE character_id = $6 returning *",
-    [
-      data.user_id,
-      data.char_name,
-      data.char_height,
-      data.char_age,
-      data.char_alive,
-      id
-    ]
-  );
+// export async function updateCharacter(id, data) {
+//   const update = await query(
+//     "UPDATE CharacterTable SET user_id = $1, char_name = $2, char_height = $3, char_age = $4, char_alive = $5 WHERE character_id = $6 returning *",
+//     [
+//       data.user_id,
+//       data.char_name,
+//       data.char_height,
+//       data.char_age,
+//       data.char_alive,
+//       id
+//     ]
+//   );
 
-  return update.rows;
+//   return update.rows;
+// }
+
+
+
+export async function updateCharacter(id, data) {
+
+let thingToEdit = Object.keys(data)[1]
+
+const update = await query(`UPDATE CharacterTable SET ${thingToEdit} = $1 WHERE character_id = $2 returning *`,[data[thingToEdit], id])
+console.log(update)
+return update.rows;
 }
+
+
+
 
 //**********Delete character by ID**********
 
