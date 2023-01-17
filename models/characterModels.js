@@ -36,15 +36,30 @@ export async function getCharacterName(name) {
 //   return update.rows;
 // }
 
+
+
 export async function updateCharacter(id, data) {
 
-  let thingToEdit = Object.keys(data)[1]
+ let thingToEdit = Object.keys(data)[1]
   
   const update = await query(`UPDATE CharacterTable SET ${thingToEdit} = $1 WHERE character_id = $2 returning *`,[data[thingToEdit], id])
   console.log(update)
   return update.rows;
   }
   
+
+
+// export async function updateCharacter(id, data) {
+
+// let thingToEdit = Object.keys(data)[1]
+
+// const update = await query(`UPDATE CharacterTable SET ${thingToEdit} = $1 WHERE character_id = $2 returning *`,[data[thingToEdit], id])
+// console.log(update)
+// return update.rows;
+// }
+
+
+
 
 //**********Delete character by ID**********
 
