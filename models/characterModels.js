@@ -6,6 +6,12 @@ export async function getCharacters() {
   const retrieveCharacters = await query("SELECT * FROM CharacterTable");
   return retrieveCharacters.rows;
 }
+//**********Get user specific characters**********
+
+export async function getUsersCharacters(email) {
+  const retrieveCharacters = await query("SELECT * FROM CharacterTable WHERE user_id = $1", [email]);
+  return retrieveCharacters.rows;
+}
 
 //**********Search for character by name**********
 
