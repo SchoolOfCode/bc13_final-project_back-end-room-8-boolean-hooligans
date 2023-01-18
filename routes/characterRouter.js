@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.get("/", async function (req, res) {
   if (req.query.user_id !== undefined) {
-    const character = await getUsersCharacters(req.query.char_name);
+    const character = await getUsersCharacters(req.query.user_id);
     return res.json({ success: true, payload: character })}
   if (req.query.char_name !== undefined) {
     const character = await getCharacterName(req.query.char_name);

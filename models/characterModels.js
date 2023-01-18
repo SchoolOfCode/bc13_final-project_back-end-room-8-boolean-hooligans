@@ -9,7 +9,7 @@ export async function getCharacters() {
 //**********Get user specific characters**********
 
 export async function getUsersCharacters(email) {
-  const retrieveCharacters = await query("SELECT * FROM CharacterTable WHERE user_id = $1", [`${email}%`]);
+  const retrieveCharacters = await query("SELECT * FROM CharacterTable WHERE user_id = $1", [email]);
   return retrieveCharacters.rows;
 }
 
