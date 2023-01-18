@@ -4,7 +4,8 @@ import {
   getCharacterName,
   createCharacter,
   updateCharacter,
-  murderCharacter
+  murderCharacter,
+  getUsersCharacters
 } from "../models/characterModels.js";
 const router = express.Router();
 
@@ -12,6 +13,9 @@ const router = express.Router();
 //Get all characters and search by parameter
 
 router.get("/", async function (req, res) {
+  if (req.query.user_id !== undefined) {
+    const character = await getUsersCharacters(req.query.char_name);
+    return res.json({ success: true, payload: character })}
   if (req.query.char_name !== undefined) {
     const character = await getCharacterName(req.query.char_name);
     return res.json({ success: true, payload: character });
