@@ -13,13 +13,14 @@ const router = express.Router();
 //Get all characters and search by parameter 
 
 router.get("/", async function (req, res) {
-  if (req.query.user_id !== undefined) {
-    const character = await getUsersCharacters(req.query.user_id);
-    return res.json({ success: true, payload: character })}
   if (req.query.char_name !== undefined) {
-    const character = await getCharacterName(req.query.char_name);
-    return res.json({ success: true, payload: character });
-  } else {
+    const character = await getCharacterName(req.query.char_name, req.query.user_email);
+    return res.json({ success: true, payload: character });}
+  if (req.query.user_email !== undefined) {
+    const character = await getUsersCharacters(req.query.user_email);
+    return res.json({ success: true, payload: character })}
+ 
+   else {
     const characters = await getCharacters();
     return res.json({ success: true, payload: characters });
   }
