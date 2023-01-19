@@ -10,7 +10,7 @@ import {
 const router = express.Router();
 
 
-//Get all characters and search by parameter
+//Get all characters and search by parameter 
 
 router.get("/", async function (req, res) {
   if (req.query.user_id !== undefined) {
