@@ -23,7 +23,7 @@ export async function getCharacterName(name) {
   return retrieveCharacter.rows;
 }
 
-//**********Edit/Update Character by ID**********
+//**********Ed it/Update Character by ID**********
 // make this more dynamic - certain things may be blank
 
 // export async function updateCharacter(id, data) {
