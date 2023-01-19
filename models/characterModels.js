@@ -9,21 +9,21 @@ export async function getCharacters() {
 //**********Get user specific characters**********
 
 export async function getUsersCharacters(email) {
-  const retrieveCharacters = await query("SELECT * FROM CharacterTable WHERE user_id = $1", [email]);
+  const retrieveCharacters = await query("SELECT * FROM CharacterTable WHERE user_email = $1", [email]);
   return retrieveCharacters.rows;
 }
 
 //**********Search for character by name**********
 
-export async function getCharacterName(name) {
+export async function getCharacterName(name, email) {
   const retrieveCharacter = await query(
-    "SELECT * FROM CharacterTable WHERE char_name ILIKE $1",
-    [`${name}%`]
+    "SELECT * FROM CharacterTable WHERE char_name ILIKE $1 AND user_email = $2 ",
+    [`${name}%`, email]
   );
   return retrieveCharacter.rows;
 }
 
-//**********Edit/Update Character by ID**********
+//**********Ed it/Update Character by ID**********
 // make this more dynamic - certain things may be blank
 
 // export async function updateCharacter(id, data) {
@@ -99,18 +99,11 @@ export async function murderCharacter(id) {
 //dynamic version
 
 export async function createCharacter(data) {
-  let params = [data.user_id, data.char_name];
+  let params = [data.user_email, data.char_name];
   let paramCount = 2;
   let dollarParams = ") VALUES ($1, $2";
 
-  let sqlquery = "INSERT INTO CharacterTable (user_id, char_name";
-  if (data.char_height) {
-    sqlquery += ", char_height";
-    params.push(data.char_height);
-    paramCount++;
-    dollarParams += ", $" + paramCount;
-  }
-
+  let sqlquery = "INSERT INTO CharacterTable (user_email, char_name";
   if (data.char_age) {
     sqlquery += ", char_age";
     params.push(data.char_age);
@@ -125,6 +118,160 @@ export async function createCharacter(data) {
     dollarParams += ", $" + paramCount;
   }
 
+  if (data.char_background) {
+    sqlquery += ", char_background";
+    params.push(data.char_background);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_desc) {
+    sqlquery += ", char_desc";
+    params.push(data.char_desc);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_disabilities) {
+    sqlquery += ", char_disabilities";
+    params.push(data.char_disabilities);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_eyeColour) {
+    sqlquery += ", char_eyeColour";
+    params.push(data.char_eyeColour);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_fears) {
+    sqlquery += ", char_fears";
+    params.push(data.char_fears);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_features) {
+    sqlquery += ", char_features";
+    params.push(data.char_features);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_gender) {
+    sqlquery += ", char_gender";
+    params.push(data.char_gender);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_hairColour) {
+    sqlquery += ", char_hairColour";
+    params.push(data.char_hairColour);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_height) {
+    sqlquery += ", char_height";
+    params.push(data.char_height);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_hopes) {
+    sqlquery += ", char_hopes";
+    params.push(data.char_hopes);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_img) {
+    sqlquery += ", char_img";
+    params.push(data.char_img);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_job) {
+    sqlquery += ", char_job";
+    params.push(data.char_job);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_likes) {
+    sqlquery += ", char_likes";
+    params.push(data.char_likes);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_morality) {
+    sqlquery += ", char_morality";
+    params.push(data.char_morality);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_notes) {
+    sqlquery += ", char_notes";
+    params.push(data.char_notes);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_relationships) {
+    sqlquery += ", char_relationships";
+    params.push(data.char_relationships);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_sexuality) {
+    sqlquery += ", char_sexuality";
+    params.push(data.char_sexuality);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_skills) {
+    sqlquery += ", char_skills";
+    params.push(data.char_skills);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_skinColour) {
+    sqlquery += ", char_skinColour";
+    params.push(data.char_skinColour);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_species) {
+    sqlquery += ", char_species";
+    params.push(data.char_species);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_speech) {
+    sqlquery += ", char_speech";
+    params.push(data.char_speech);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
+  if (data.char_weight) {
+    sqlquery += ", char_weight";
+    params.push(data.char_weight);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+  
   sqlquery += dollarParams + ") returning *";
 
   const result = await query(`${sqlquery}`, params);
