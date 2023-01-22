@@ -14,6 +14,8 @@ export async function getUsersSharedCharacters(email) {
   return retrieveCharacters.rows;
 }
 
+// fixed letter
+
 export async function shareCharacter(data) {
   const createCharacter = await query(
     "INSERT INTO Collab (user_email, character_id) VALUES ($1, $2) RETURNNING *",
