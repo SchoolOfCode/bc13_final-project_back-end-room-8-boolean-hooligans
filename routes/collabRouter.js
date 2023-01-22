@@ -4,7 +4,7 @@ import {
   getAllCollabData,
   getUsersSharedCharacters,
   shareCharacter
-} from "../models/collabModels.js";
+} from "../models/CollabModels.js";
 
 const collabRouter = express.Router();
 
