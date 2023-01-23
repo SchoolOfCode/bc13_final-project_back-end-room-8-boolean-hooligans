@@ -223,6 +223,13 @@ export async function createCharacter(data) {
     dollarParams += ", $" + paramCount;
   }
 
+  if (data.char_pronouns) {
+    sqlquery += ", char_pronouns";
+    params.push(data.char_pronouns);
+    paramCount++;
+    dollarParams += ", $" + paramCount;
+  }
+
   if (data.char_relationships) {
     sqlquery += ", char_relationships";
     params.push(data.char_relationships);
